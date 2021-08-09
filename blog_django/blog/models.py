@@ -4,7 +4,7 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 
 class TimeStampedModel(models.Model):
 
-    create_at = models.DateTimeField(auto_now_add = True)
+    created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now= True)
 
     class Meta:
@@ -28,8 +28,11 @@ class Post(TimeStampedModel):
     def natural_time(self):
         return naturaltime(self.created_at)
     
-    # class Meta:
-    #     ordering = ['-created_at']
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ['-created_at']
 
 class Comment(TimeStampedModel):
    name = models.CharField(max_length=140) 
