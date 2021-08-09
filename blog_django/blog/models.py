@@ -11,7 +11,7 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 class Post(TimeStampedModel):
-    image = models.CharField(max_length=200)
+    image = models.CharField(max_length=200, null=True, blank=True)
     title = models.CharField(max_length=140)
     content = models.TextField()
     tags = TaggableManager()
