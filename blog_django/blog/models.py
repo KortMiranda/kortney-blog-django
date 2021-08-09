@@ -1,3 +1,32 @@
 from django.db import models
+from taggit.managers import TaggableManager
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
-# Create your models here.
+class TimeStampedModel(models.Model):
+
+    create_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now= True)
+
+    class Meta:
+        abstract = True
+
+class Blog(TimeStampedModel):
+    image = models.CharField(max_length=200)
+    title = models.CharField(max_length=140)
+    content = models.TextField()
+    tags = TaggableManager()
+
+    @property
+    def like_counts(self):
+        return self.likes.all().count()
+
+    @property
+    def comment_counts(self):
+        return self.comments.all().count()
+    
+    @property
+    def natural_time(self):
+        return naturaltime(self.created_at)
+    
+    # class Meta:
+    #     ordering = ['-created_at']
