@@ -40,7 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'blog',
     'taggit',
+    'rest_framework',
+    'taggit_serializer',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

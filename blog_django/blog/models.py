@@ -37,7 +37,10 @@ class Post(TimeStampedModel):
 class Comment(TimeStampedModel):
    name = models.CharField(max_length=140) 
    message = models.TextField()
-   blog = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, related_name='comments')
+   post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, related_name='comments')
+
+   def __str__(self):
+       return self.message
 
 
 
