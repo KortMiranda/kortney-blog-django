@@ -10,7 +10,7 @@ class TimeStampedModel(models.Model):
     class Meta:
         abstract = True
 
-class Blog(TimeStampedModel):
+class Post(TimeStampedModel):
     image = models.CharField(max_length=200)
     title = models.CharField(max_length=140)
     content = models.TextField()
@@ -30,3 +30,11 @@ class Blog(TimeStampedModel):
     
     # class Meta:
     #     ordering = ['-created_at']
+
+class Comment(TimeStampedModel):
+   name = models.CharField(max_length=140) 
+   message = models.TextField()
+   blog = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, related_name='comments')
+
+
+
